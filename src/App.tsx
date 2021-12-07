@@ -1,10 +1,10 @@
 import React from 'react';
-import { QueryClientProvider, useQueryClient } from 'react-query';
+import { QueryClientProvider, QueryClient } from 'react-query';
 import { BattleView } from './BattleView';
 
-export const App = () => {
-  const queryClient = useQueryClient();
+const queryClient = new QueryClient();
 
+export const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BattleView />

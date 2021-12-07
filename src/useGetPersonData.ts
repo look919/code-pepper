@@ -13,21 +13,27 @@ interface GETPersonData {
 }
 
 export const useGetPersonData = (personId: string) => {
-  const { data, isLoading } = useQuery(getSinglePersonCacheKeys(personId), async () => {
-    const {
-      data: { name, height, mass, gender, birth_year }
-    } = await axios.get<GETPersonData>(`https://swapi.dev/api/people/${personId}`);
+  const { data, isLoading, isSuccess } = useQuery(
+    getSinglePersonCacheKeys(personId),
+    async () => {
+      const {
+        data: { name, height, mass, gender, birth_year }
+      } = await axios.get<GETPersonData>(`https://swapi.dev/api/people/${personId}`);
 
-    const person: PersonData = {
-      name,
-      height,
-      mass,
-      gender,
-      birthYear: birth_year
-    };
+      const person: PersonData = {
+        name,
+        height,
+        mass,
+        gender,
+        birthYear: birth_year
+      };
 
-    return person;
-  });
+      return person;
+    },
+    {
+      enabled: Boolean(personId)
+    }
+  );
 
-  return { data, isLoading };
+  return { data, isLoading, isSuccess };
 };

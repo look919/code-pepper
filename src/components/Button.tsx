@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { Button as MUIButton } from '@material-ui/core';
+import { Button as MUIButton, ButtonProps } from '@material-ui/core';
 
-export const Button: FC = ({ children }) => {
+export const Button: FC<ButtonProps> = ({ children, ...props }) => {
   return (
-    <MUIButton variant='contained' color='primary'>
+    <MUIButton variant='contained' color='primary' {...props}>
       {children}
     </MUIButton>
   );
