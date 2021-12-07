@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Card, CardContent, CardMedia, Grid, GridSize, Typography } from '@material-ui/core';
 import { Gender } from 'src/utils/enums';
 
-interface PersonData {
+export interface PersonData {
   name: string;
   height: string;
   mass: string;
