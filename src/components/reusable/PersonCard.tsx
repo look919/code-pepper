@@ -8,6 +8,7 @@ type CardBattleStatus = 'won' | 'drewOrLost';
 
 interface PersonCardProps {
   person: PersonData;
+  onFightAgain: () => void;
   status: CardBattleStatus;
   isLoading: boolean;
 }
@@ -18,9 +19,10 @@ const useStyles = makeStyles({
   }
 });
 
-// I usually destructure up to two/three short proporties, otherwise I do that inside of the component.
-// I know that people have different opinion about how to approach destructure props properly :)
-export const PersonCard = ({ person, status, isLoading }: PersonCardProps) => {
+// I usually destructure up to two proporties, otherwise I do that inside of the component.
+// I wanted to clarify that because I know that people have different opinion about how to approach destructure props properly :)
+export const PersonCard = (props: PersonCardProps) => {
+  const { person, onFightAgain, status, isLoading } = props;
   const classes = useStyles();
 
   return (
@@ -52,7 +54,7 @@ export const PersonCard = ({ person, status, isLoading }: PersonCardProps) => {
                   </PersonSingleInfo>
 
                   <Grid item xs={6}>
-                    <Button>Fight again</Button>
+                    <Button onClick={onFightAgain}>Fight again</Button>
                   </Grid>
                 </>
               )}

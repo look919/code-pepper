@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, Grid, TextField, Typography, makeStyles, MenuItem } from '@material-ui/core';
 import { Button } from './reusable';
 import { useBattleContext } from './BattleContext';
 import { LeftSidePersonCard } from './LeftSidePersonCard';
@@ -17,18 +17,29 @@ const useStyles = makeStyles({
 
 export const BattleView = () => {
   const classes = useStyles();
-  const { setLeftSidePersonId, setRightSidePersonId } = useBattleContext();
+  const { winningCriteria, setWinningCriteria, setLeftSidePersonId, setRightSidePersonId } = useBattleContext();
 
   const handleStartRandomBattle = () => {
     setLeftSidePersonId(getRandomPersonId());
     setRightSidePersonId(getRandomPersonId());
   };
 
+  const handleChangeWinningCriteria = e => {
+    console.log(e.target.value);
+    setWinningCriteria(e.target.value);
+  };
+
   return (
     <div className={classes.container}>
       <Grid container spacing={2} alignItems='center' justifyContent='center'>
         <Grid item xs={12}>
-          <Button onClick={handleStartRandomBattle}>Start Random Battle</Button>
+          <Box display='flex' justifyContent='space-between'>
+            <Button onClick={handleStartRandomBattle}>Start Random Battle</Button>
+            <TextField select value={winningCriteria} onChange={handleChangeWinningCriteria} helperText='Please select winning criteria'>
+              <MenuItem value={'mass'}>Mass</MenuItem>
+              <MenuItem value={'height'}>Height</MenuItem>
+            </TextField>
+          </Box>
         </Grid>
         <Grid item xs={5}>
           <LeftSidePersonCard />

@@ -1,12 +1,8 @@
-import { useState } from 'react';
 import { BattleResult } from 'src/utils/enums';
 import { useBattleContext } from './BattleContext';
 
-type WinningCriteria = 'mass' | 'height';
-
 export const useGetWinningSide = () => {
-  const [winningCriteria, setWinningCriteria] = useState<WinningCriteria>('mass');
-  const { leftSidePerson, rightSidePerson } = useBattleContext();
+  const { winningCriteria, leftSidePerson, rightSidePerson } = useBattleContext();
 
   const getWinningSide = (): BattleResult => {
     if (!leftSidePerson.data || !rightSidePerson.data) return undefined;
@@ -25,5 +21,5 @@ export const useGetWinningSide = () => {
     return isLeftSideWInning ? BattleResult.leftSideWon : BattleResult.rightSideWon;
   };
 
-  return { getWinningSide, setWinningCriteria };
+  return { getWinningSide };
 };

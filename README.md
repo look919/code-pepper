@@ -1,3 +1,5 @@
+There are many cases where mass/height is unknown, so I decided to make a draw then. If its draw or lose card is getting hidden, if card won its battle then there is possibility to fight once again
+
 ### `yarn start`
 
 Runs the app in the development mode.\
