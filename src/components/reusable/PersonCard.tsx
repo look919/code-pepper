@@ -15,7 +15,7 @@ interface PersonCardProps {
 
 const useStyles = makeStyles({
   hiddenLoser: {
-    opacity: 0.4
+    opacity: 0.6
   }
 });
 
@@ -50,7 +50,7 @@ export const PersonCard = (props: PersonCardProps) => {
               {status === 'won' && (
                 <>
                   <PersonSingleInfo type='Header' size={6}>
-                    Winner
+                    Winner!
                   </PersonSingleInfo>
 
                   <Grid item xs={6}>
@@ -95,7 +95,7 @@ const PersonSingleInfo: FC<PersonSingleInfoProps> = props => {
 
   if (type === 'Skeleton') {
     return (
-      <Grid item xs={size}>
+      <Grid item xs={size} data-testid='personcard-skeleton'>
         <Skeleton width={140} height={25} />
       </Grid>
     );

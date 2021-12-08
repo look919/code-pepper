@@ -4,7 +4,7 @@ import { Button } from './reusable';
 import { useBattleContext } from './BattleContext';
 import { LeftSidePersonCard } from './LeftSidePersonCard';
 import { RightSidePersonCard } from './RightSidePersonCard';
-import { getRandomPersonId } from '../utils/getRandomPersonId';
+import { getRandomPersonId } from 'src/utils/getRandomPersonId';
 
 const useStyles = makeStyles({
   container: {
@@ -24,10 +24,7 @@ export const BattleView = () => {
     setRightSidePersonId(getRandomPersonId());
   };
 
-  const handleChangeWinningCriteria = e => {
-    console.log(e.target.value);
-    setWinningCriteria(e.target.value);
-  };
+  const handleChangeWinningCriteria = (e: any) => setWinningCriteria(e.target.value);
 
   return (
     <div className={classes.container}>
@@ -35,7 +32,13 @@ export const BattleView = () => {
         <Grid item xs={12}>
           <Box display='flex' justifyContent='space-between'>
             <Button onClick={handleStartRandomBattle}>Start Random Battle</Button>
-            <TextField select value={winningCriteria} onChange={handleChangeWinningCriteria} helperText='Please select winning criteria'>
+            <TextField
+              select
+              value={winningCriteria}
+              onChange={handleChangeWinningCriteria}
+              helperText='Please select winning criteria'
+              inputProps={{ 'data-testid': 'winningCriteria select box' }}
+            >
               <MenuItem value={'mass'}>Mass</MenuItem>
               <MenuItem value={'height'}>Height</MenuItem>
             </TextField>

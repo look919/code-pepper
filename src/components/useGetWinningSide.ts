@@ -1,5 +1,5 @@
-import { BattleResult } from 'src/utils/enums';
 import { useBattleContext } from './BattleContext';
+import { BattleResult } from 'src/utils/enums';
 
 export const useGetWinningSide = () => {
   const { winningCriteria, leftSidePerson, rightSidePerson } = useBattleContext();
