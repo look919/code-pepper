@@ -1,21 +1,33 @@
 import React, { FC } from 'react';
-import { Card, CardContent, CardMedia, Grid, GridSize, Typography } from '@material-ui/core';
+import { Card, CardContent, CardMedia, Grid, GridSize, makeStyles, Typography } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import { PersonData } from 'src/utils/types';
+import { Button } from '.';
+
+type CardBattleStatus = 'won' | 'drewOrLost';
 
 interface PersonCardProps {
   person: PersonData;
+  status: CardBattleStatus;
   isLoading: boolean;
 }
 
-// I usually destructure up to two proporties, otherwise I do that inside of the component.
+const useStyles = makeStyles({
+  hiddenLoser: {
+    opacity: 0.4
+  }
+});
+
+// I usually destructure up to two/three short proporties, otherwise I do that inside of the component.
 // I know that people have different opinion about how to approach destructure props properly :)
-export const PersonCard = ({ person, isLoading }: PersonCardProps) => {
+export const PersonCard = ({ person, status, isLoading }: PersonCardProps) => {
+  const classes = useStyles();
+
   return (
-    <Card>
+    <Card className={status === 'drewOrLost' ? classes.hiddenLoser : null}>
       <CardMedia component='img' height='140' image='/static/star-wars.jpg' alt='Default star wars photo' />
       <CardContent>
-        <Grid container spacing={1}>
+        <Grid container spacing={2}>
           {!isLoading ? (
             <>
               <PersonSingleInfo type='Header' size={12}>
@@ -33,6 +45,17 @@ export const PersonCard = ({ person, isLoading }: PersonCardProps) => {
               <PersonSingleInfo type='Detail' size={6}>
                 Height: {person.height}
               </PersonSingleInfo>
+              {status === 'won' && (
+                <>
+                  <PersonSingleInfo type='Header' size={6}>
+                    Winner
+                  </PersonSingleInfo>
+
+                  <Grid item xs={6}>
+                    <Button>Fight again</Button>
+                  </Grid>
+                </>
+              )}
             </>
           ) : (
             <>
@@ -78,7 +101,7 @@ const PersonSingleInfo: FC<PersonSingleInfoProps> = props => {
 
   return (
     <Grid item xs={size}>
-      <Typography variant={type === 'Header' ? 'body1' : 'body2'}>{children}</Typography>
+      <Typography variant={type === 'Header' ? 'h5' : 'body2'}>{children}</Typography>
     </Grid>
   );
 };

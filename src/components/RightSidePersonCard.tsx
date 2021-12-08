@@ -1,9 +1,15 @@
 import React from 'react';
-import { useBattleContext } from './BattleContext';
 import { PersonCard } from './reusable';
+import { useBattleContext } from './BattleContext';
+import { useGetWinningSide } from './useGetWinningSide';
+import { BattleResult } from 'src/utils/enums';
 
 export const RightSidePersonCard = () => {
   const { rightSidePerson, isDataLoading } = useBattleContext();
+  const { getWinningSide } = useGetWinningSide();
 
-  return <PersonCard person={rightSidePerson.data} isLoading={isDataLoading} />;
+  const battleResult = getWinningSide();
+  const isWinner = battleResult === BattleResult.rightSideWon;
+
+  return <PersonCard person={rightSidePerson.data} status={isWinner ? 'won' : 'drewOrLost'} isLoading={isDataLoading} />;
 };
