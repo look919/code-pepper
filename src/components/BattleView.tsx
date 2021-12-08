@@ -1,10 +1,10 @@
 import React from 'react';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
-import { Button } from './components';
+import { Button } from './reusable';
 import { useBattleContext } from './BattleContext';
 import { LeftSidePersonCard } from './LeftSidePersonCard';
 import { RightSidePersonCard } from './RightSidePersonCard';
-import { getRandomPersonId } from './utils/getRandomPersonId';
+import { getRandomPersonId } from '../utils/getRandomPersonId';
 
 const useStyles = makeStyles({
   container: {

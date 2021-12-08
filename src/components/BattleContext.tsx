@@ -1,7 +1,7 @@
 import React, { Dispatch, FC, SetStateAction, useState } from 'react';
 import { UseQueryResult } from 'react-query';
 import { useGetPersonData } from './useGetPersonData';
-import { PersonData } from './utils/types';
+import { PersonData } from '../utils/types';
 
 type UseQueryPersonResult = Pick<UseQueryResult<PersonData, unknown>, 'data' | 'isSuccess' | 'isLoading'>;
 
