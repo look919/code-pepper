@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import axios from 'axios';
 import { getSinglePersonCacheKeys } from './utils/cache-keys';
 import { Gender } from './utils/enums';
-import { PersonData } from './components/PersonCard';
+import { PersonData } from './utils/types';
 
 interface GETPersonData {
   name: string;

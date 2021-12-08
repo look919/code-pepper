@@ -1,16 +1,7 @@
 import React, { FC } from 'react';
 import { Card, CardContent, CardMedia, Grid, GridSize, Typography } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
-import { Gender } from 'src/utils/enums';
-import { useGetPersonData } from 'src/useGetPersonData';
-
-export interface PersonData {
-  name: string;
-  height: string;
-  mass: string;
-  gender: Gender;
-  birthYear: string;
-}
+import { PersonData } from 'src/utils/types';
 
 interface PersonCardProps {
   person: PersonData;
@@ -27,29 +18,29 @@ export const PersonCard = ({ person, isLoading }: PersonCardProps) => {
         <Grid container spacing={1}>
           {!isLoading ? (
             <>
-              <PersonData type='Header' size={12}>
+              <PersonSingleInfo type='Header' size={12}>
                 {person.name}
-              </PersonData>
-              <PersonData type='Detail' size={6}>
+              </PersonSingleInfo>
+              <PersonSingleInfo type='Detail' size={6}>
                 Birth year: {person.birthYear}
-              </PersonData>
-              <PersonData type='Detail' size={6}>
+              </PersonSingleInfo>
+              <PersonSingleInfo type='Detail' size={6}>
                 Gender: {person.gender}
-              </PersonData>
-              <PersonData type='Detail' size={6}>
+              </PersonSingleInfo>
+              <PersonSingleInfo type='Detail' size={6}>
                 Mass: {person.mass}
-              </PersonData>
-              <PersonData type='Detail' size={6}>
+              </PersonSingleInfo>
+              <PersonSingleInfo type='Detail' size={6}>
                 Height: {person.height}
-              </PersonData>
+              </PersonSingleInfo>
             </>
           ) : (
             <>
-              <PersonData type='Skeleton' size={12} />
-              <PersonData type='Skeleton' size={6} />
-              <PersonData type='Skeleton' size={6} />
-              <PersonData type='Skeleton' size={6} />
-              <PersonData type='Skeleton' size={6} />
+              <PersonSingleInfo type='Skeleton' size={12} />
+              <PersonSingleInfo type='Skeleton' size={6} />
+              <PersonSingleInfo type='Skeleton' size={6} />
+              <PersonSingleInfo type='Skeleton' size={6} />
+              <PersonSingleInfo type='Skeleton' size={6} />
             </>
           )}
         </Grid>
@@ -72,9 +63,9 @@ interface SkeletonDetail {
   size: GridSize;
 }
 
-type PersonDataProps = PersonHeader | PersonDetail | SkeletonDetail;
+type PersonSingleInfoProps = PersonHeader | PersonDetail | SkeletonDetail;
 
-const PersonData: FC<PersonDataProps> = props => {
+const PersonSingleInfo: FC<PersonSingleInfoProps> = props => {
   const { type, size, children } = props;
 
   if (type === 'Skeleton') {
